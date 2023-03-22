@@ -1,6 +1,6 @@
-# information about exercise 2
+### information about exercise 2
 All the runs were done on the epyc node
-##Explanation of the files
+#Explanation of the files
 -*_double.txt contains all the results of of a script where, with 64 OMP threads, the benchmark were runned with different sizes of matrices from 1000 to 20000, in double precision
 -*_experiments.txt contains results of runs with different combination of OMP_PLACES and OMP_PROC_BIND, in this order: (cores,master), (cores,spread), (cores,close), (threads,master), (threads,spread), (threads,close)
 -oblas.txt and mkl.txt contains all the results of the runs for testing the scaling at the increasing of openMP threads
