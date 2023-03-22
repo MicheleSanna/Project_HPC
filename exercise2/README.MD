@@ -1,7 +1,7 @@
 ### information about exercise 2
 All the runs were done on the epyc node\\
 
-#Explanation of the files
+Explanation of the files:
 
 -*_double.txt contains all the results of of a script where, with 64 OMP threads, the benchmark were runned with different sizes of matrices from 1000 to 20000, in double precision
 
