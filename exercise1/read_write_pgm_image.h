@@ -16,7 +16,7 @@
 #define swap(mem) (mem)
 #endif
 
-void write_pgm_image( void *image, int maxval, int xsize, int ysize, const char *image_name);
-void read_pgm_image( void **image, int *maxval, int *xsize, int *ysize, const char *image_name);
+void write_pgm_image( unsigned char **image, int maxval, int xsize, int ysize, const char *image_name);
+unsigned char* read_pgm_image(int *maxval, int *xsize, int *ysize, const char *image_name);
 void swap_image( void *image, int xsize, int ysize, int maxval );
 void * generate_gradient( int maxval, int xsize, int ysize );
