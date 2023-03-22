@@ -362,19 +362,19 @@ char* intToString(int value, char* buffer) {
  
         value = value / base;
     }
-    // se il numero è 0
+    // if the number is 0
     if (i == 0) {
         buffer[i++] = '0';
     }
  
-    // Se la base è 10 e il valore è negativo, la stringa risultante
-    // è preceduto da un segno meno (-)
-    // Con qualsiasi altra base, il valore è sempre considerato senza segno
+    // if the base is 10 and the value negative, the string
+    // is preceded by a (-) sign
+    // With any other base, the value is considered without sign
     if (value < 0 && base == 10) {
         buffer[i++] = '-';
     }
-    buffer[i] = '\0'; // stringa di terminazione nulla
-    // inverte la stringa e la restituisce
+    buffer[i] = '\0'; // Null termination string
+    // Reversing the string and returning it
     return reverse(buffer, 0, i - 1);
 }
 
