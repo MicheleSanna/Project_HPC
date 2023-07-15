@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef MKL 
+#ifdef MKL
 #include "mkl_cblas.h"
 #endif
 
@@ -70,18 +70,18 @@ int main(int argc, char** argv)
     }
     else
     {
-    printf( "Usage: %s M K N, the corresponding matrices will be  A(M,K) B(K,N) \n", argv[0]); 
-    return 0; 
+    //printf( "Usage: %s M K N, the corresponding matrices will be  A(M,K) B(K,N) \n", argv[0]); 
+    return 0;
     }
 
 
-    printf ("\n This example computes real matrix C=alpha*A*B+beta*C using \n"
-            " BLAS function dgemm, where A, B, and  C are matrices and \n"
-            " alpha and beta are scalars\n\n");
+    //printf ("\n This example computes real matrix C=alpha*A*B+beta*C using \n"
+    //        " BLAS function dgemm, where A, B, and  C are matrices and \n"
+    //        " alpha and beta are scalars\n\n");
 
 
-    printf (" Initializing data for matrix multiplication C=A*B for matrix \n"
-            " A(%ix%i) and matrix B(%ix%i)\n\n", m, k, k, n);
+    //printf (" Initializing data for matrix multiplication C=A*B for matrix \n"
+    //        " A(%ix%i) and matrix B(%ix%i)\n\n", m, k, k, n);
     DATATYPE
     alpha = 1.0; beta = 0.0;
 
@@ -109,7 +109,7 @@ int main(int argc, char** argv)
     }
 
     sleep(1);
-    printf (" Computing matrix product using gemm function via CBLAS interface \n");
+    //printf (" Computing matrix product using gemm function via CBLAS interface \n");
     clock_gettime(CLOCK_MONOTONIC, &begin);
     GEMMCPU(CblasColMajor, CblasNoTrans, CblasNoTrans,
                 m, n, k, alpha, A, m, B, k, beta, C, m);
@@ -118,7 +118,17 @@ int main(int argc, char** argv)
     double gflops = 2.0 * m *n*k;
     gflops = gflops/elapsed*1.0e-9; 
     printf ("\n Elapsed time %d.%d s\n\n\n", diff(begin,end).tv_sec, diff(begin,end).tv_nsec );
-    printf("%dx%dx%d\t%lf s\t%lf GFLOPS\n", m, n, k, elapsed, gflops);
+    printf("%dx%dx%d\t%lf s\t%lf GFLOPs\n", m, n, k, elapsed, gflops);
+#ifdef MKL
+    FILE *file_mkl = fopen("mkl_double.csv", "a");
+    fprintf(file_mkl, "%d,%d,%d,%lf,%lf\n", m, n, k, elapsed, gflops);
+    fclose(file_mkl);
+#endif
+#ifdef OPENBLAS
+    FILE *file_oblas = fopen("oblas_double.csv", "a");
+    fprintf(file_oblas, "%d,%d,%d,%lf,%lf\n", m, n, k, elapsed, gflops);
+    fclose(file_oblas);
+#endif
 
 
 #ifdef PRINT
